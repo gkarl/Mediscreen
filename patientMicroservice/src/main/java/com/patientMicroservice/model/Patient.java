@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "patient")
-public class PatientModel {
+public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +29,10 @@ public class PatientModel {
     @Column(name = "phone")
     private String phone;
 
-    public PatientModel() {
+    public Patient() {
     }
 
-    public PatientModel(Integer id, String firstName, String lastName, LocalDate dob, char sex, String address, String phone) {
+    public Patient(Integer id, String firstName, String lastName, LocalDate dob, char sex, String address, String phone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -100,7 +100,7 @@ public class PatientModel {
 
     @Override
     public String toString() {
-        return "PatientModel{" +
+        return "Patient{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
