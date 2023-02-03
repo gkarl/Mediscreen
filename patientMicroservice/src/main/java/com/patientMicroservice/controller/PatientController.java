@@ -49,9 +49,9 @@ public class PatientController {
     }
 
     @PutMapping("/patient/update/{id}")
-    public void updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
+    public Patient updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
         logger.info("PUT patient update");
-        patientService.updatePatient(id, patient);
+        return patientService.updatePatient(id, patient);
     }
 
 

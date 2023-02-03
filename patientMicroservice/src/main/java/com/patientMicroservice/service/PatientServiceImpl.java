@@ -44,7 +44,7 @@ public class PatientServiceImpl {
         throw new PatientNotFoundException("Could not find any user whith ID " + id);
     }
 
-    public void updatePatient(Integer id, Patient patientUpdate) {
+    public Patient updatePatient(Integer id, Patient patientUpdate) {
         logger.info("Service update patient infos");
         Optional<Patient> patient = patientRepository.findById(id);
         patient.get().setFirstName(patientUpdate.getFirstName());
@@ -53,7 +53,7 @@ public class PatientServiceImpl {
         patient.get().setSex(patientUpdate.getSex());
         patient.get().setAddress(patientUpdate.getAddress());
         patient.get().setPhone(patientUpdate.getPhone());
-        patientRepository.save(patient.get());
+        return patientRepository.save(patient.get());
     }
 
     public void deleteByIdPatient(Integer id) throws PatientNotFoundException {
