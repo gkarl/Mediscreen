@@ -2,6 +2,7 @@ package com.frontMediscreen.frontMediscreen.proxies;
 
 import com.frontMediscreen.frontMediscreen.beans.PatientBean;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public interface PatientProxy {
 
     @PostMapping("/patient/add")
     PatientBean addPatient(@RequestBody PatientBean patient);
+
+    @PostMapping("/patient/showEditForm/{id}")
+    public void showEditForm(@PathVariable Integer id);
 
     @PutMapping("/patient/update/{id}")
     PatientBean updatePatient(@PathVariable Integer id, @RequestBody PatientBean patient);

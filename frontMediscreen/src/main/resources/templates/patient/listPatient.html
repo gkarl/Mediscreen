@@ -86,7 +86,10 @@
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
                 <td>
-
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary h6"><a class="h6 mr-3" th:href="@{'/patient/showEditForm/'+ ${patient.id}}" style="text-decoration: none; color: white">Edit</a></button>
+                       <!-- <button type="button" class="btn btn-danger h6" ><a class="h6" th:href="@{'/users/delete/'+ ${user.id}}" style="text-decoration: none; color: white">Delete</a></button>-->
+                    </div>
 
 
                 </td>
