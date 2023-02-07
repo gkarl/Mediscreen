@@ -6,6 +6,7 @@ import com.patientMicroservice.service.PatientServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +57,8 @@ public class PatientController {
 
 
     @GetMapping("/patient/delete/{id}")
-    public void deleteByIdPatient(@PathVariable ("id") Integer id) throws PatientNotFoundException {
+    public void deleteByIdPatient(@PathVariable ("id") Integer id) throws PatientNotFoundException, ChangeSetPersister.NotFoundException {
         logger.info("GET delete patient by id");
-        patientService.deleteByIdPatient(id);
+        patientService.deletePatient(id);
     }
 }

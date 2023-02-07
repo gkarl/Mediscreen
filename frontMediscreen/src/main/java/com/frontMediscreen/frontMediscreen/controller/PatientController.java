@@ -26,7 +26,7 @@ public class PatientController {
 
     @GetMapping("/patient/list")
     public String listAllPatients(Model model) {
-        logger.info("Get patient list from frontMicroservice");
+        logger.info("Get patient list front");
         List<PatientBean> listPatient = patientProxy.listAllPatients();
         model.addAttribute("patients", listPatient);
         return "patient/listPatient";
@@ -34,6 +34,7 @@ public class PatientController {
 
     @GetMapping("/patient/newForm")
     public String showNewForm(Model model) {
+        logger.info("New patient form front");
         model.addAttribute("patient", new PatientBean());
         model.addAttribute("pageTitle", "Add New Patient");
         return "patient/patient_form";
@@ -41,49 +42,34 @@ public class PatientController {
 
     @PostMapping("/patient/add")
     public String addPatient(PatientBean patient, RedirectAttributes redirectAttributes) {
+        logger.info("Add new patient Front");
         patientProxy.addPatient(patient);
         return "redirect:/patient/list";
     }
 
-    /*@GetMapping("/patient/{id}")
-    public String getByIdPatient(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+    @GetMapping("/patient/showEditForm/{id}")
+    public String showEditForm(@PathVariable("id") Integer id, PatientBean patient, Model model, RedirectAttributes redirectAttributes) {
+        logger.info("Show Edit Form front");
         try {
-            Optional<PatientBean> patient = patientProxy.getByIdPatient(id);
-            model.addAttribute("patient", patient);
-            model.addAttribute("pageTitle", "Edit patient (ID: " + id + ")");
-            return "patient/patient_form";
-        } catch (NotFoundException e) {
+            patientProxy.showEditForm(id);
+            Optional<PatientBean> patientB = patientProxy.getByIdPatient(id);
+            model.addAttribute("patient", patientB);
+            return "patient/patient_form_edit"; // template html
+        }  catch (NotFoundException e) {
             redirectAttributes.addFlashAttribute("message",  e.getMessage());
             return "redirect:/patient/list";
         }
-    }*/
-
-
-    @GetMapping("/patient/showEditForm/{id}")
-    public String showEditForm(@PathVariable("id") Integer id, PatientBean patient, Model model) {
-
-        logger.info("show Edit Form front");
-        patientProxy.showEditForm(id);
-        Optional<PatientBean> patientB = patientProxy.getByIdPatient(id);
-        model.addAttribute("patient", patientB);
-        return "patient/patient_form_edit"; // template html
     }
 
-
-    @PostMapping("/patient/update/{id}")
-    public String updatePatient(@PathVariable ("id") Integer id, @Valid PatientBean patient, BindingResult result, Model model) {
-
-        model.addAttribute("patient", patient);
-        if (result.hasErrors()) {
-            logger.error("Update patient error");
-            patient.setId(id);
-            return "patient/updatePatient"; // template html
-        }else {
-            logger.info("Update patient" + patient );
-            patientProxy.updatePatient(id, patient);
-            return "redirect:/patient/list"; // template html
+    @GetMapping("/patient/delete/{id}")
+    public String deleteById(@PathVariable ("id") Integer id, RedirectAttributes redirectAttributes) {
+        logger.info("delete patient front");
+        try {
+            patientProxy.deleteByIdPatient(id);
+        } catch (NotFoundException e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
         }
-
+        return "redirect:/patient/list";
     }
 
 

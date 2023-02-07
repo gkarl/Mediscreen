@@ -7,6 +7,7 @@ import com.patientMicroservice.repository.PatientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,6 +64,14 @@ public class PatientServiceImpl {
             patientRepository.deleteById(id);
         }
         throw new PatientNotFoundException("Could not find any user whith ID " + id);
+    }
+
+    public void deletePatient(Integer id) throws ChangeSetPersister.NotFoundException {
+        Long count = patientRepository.countById(id);
+        if (count == null || count == 0) {
+            throw  new ChangeSetPersister.NotFoundException();
+        }
+        patientRepository.deleteById(id);
     }
 
 
