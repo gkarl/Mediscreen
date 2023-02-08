@@ -9,6 +9,8 @@
     <link rel="icon" href="data:,">
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.2.1/css/all.css} "/>
+
 
     <title>Mediscreen Application</title>
 </head>
@@ -16,42 +18,38 @@
 <nav class="navbar navbar-dark navbar-expand" style="background-color: #e9ecef">
     <div class="container">
         <div class="navbar-brand bg-success" style="padding: 10px; border-radius: 5px">
-            MediScreen
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            Mediscreen
         </div>
 
         <div class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             <ul class="navbar-nav">
                 <li class="nav-item ">
                     <a class="nav-link" style="color: black;font-size: larger;" href="">
+                        <i class="fa fa-home" aria-hidden="true"></i>
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: black;font-size: larger;" href="">
+                        <i class="fa-solid fa-hospital-user"></i>
                         Patients
                     </a>
                 </li>
                 <li class="nav-item">
                     <a  class="nav-link " style="color: black;font-size:larger;" href="">
+                        <i class="fa-solid fa-user-doctor"></i>
                         Observations
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link "  style="color: black;font-size: larger;" href="">
-                        Logout
-                    </a>
-                </li>
-
             </ul>
         </div>
 
     </div>
 </nav>
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center" style=" margin-top: 150px;">
         <h1>Welcome to MediScreen Application</h1>
-
-
 
 </body>
 </html>

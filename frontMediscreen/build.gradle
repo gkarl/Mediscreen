@@ -44,6 +44,7 @@ dependencies {
 	implementation('org.springframework.cloud:spring-cloud-starter-bootstrap')
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'org.webjars', name: 'bootstrap', version: '5.2.3'
+	implementation group: 'org.webjars', name: 'font-awesome', version: '6.2.1'
 	implementation group: 'org.webjars', name: 'webjars-locator-core', version: '0.52'
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
