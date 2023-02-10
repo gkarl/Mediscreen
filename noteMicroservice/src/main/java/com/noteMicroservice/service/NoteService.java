@@ -18,14 +18,19 @@ public class NoteService {
     @Autowired
     private NoteRepository noteRepository;
 
+    public List<Note> findNotesByPatientId(Integer patientId) {
+        logger.info("Service find notes for patient whith id " + patientId);
+        return noteRepository.findAllNotesByPatientId(patientId);
+    }
+
     public Note findByIdNote(String id) {
         logger.info("Service return one note by id");
         return noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Note No found"));
     }
 
-    public List<Note> findNotesByPatientId(Integer patientId) {
-        logger.info("Service find notes for patient whith id " + patientId);
-        return noteRepository.findAllNotesByPatientId(patientId);
+    public Note addNote(Note note) {
+        logger.info("Service add a note to one patient");
+        return noteRepository.insert(note);
     }
 
 }

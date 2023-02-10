@@ -27,6 +27,9 @@ public class Note {
     @Field(value = "recommendation")
     private String recommendation;
 
+    public Note() {
+    }
+
     public Note(String id, Integer patientId, LocalDate date, String recommendation) {
         this.id = id;
         this.patientId = patientId;

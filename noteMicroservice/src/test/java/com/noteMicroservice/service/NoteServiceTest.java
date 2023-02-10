@@ -48,4 +48,13 @@ public class NoteServiceTest {
         verify(noteRepository, times(1)).findAllNotesByPatientId(1);
     }
 
+    @Test
+    @DisplayName("Test addNote")
+    public void addNoteTest() throws Exception {
+        Note note1 = new Note("1", 1, LocalDate.now(), "test1");
+        when(noteRepository.insert(any(Note.class))).thenReturn(note1);
+        noteService.addNote(note1);
+        verify(noteRepository, times(1)).insert(note1);
+    }
+
 }
