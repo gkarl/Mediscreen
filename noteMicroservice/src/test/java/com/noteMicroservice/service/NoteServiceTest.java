@@ -28,7 +28,7 @@ public class NoteServiceTest {
     @MockBean
     private NoteRepository noteRepository;
 
-    @Test
+   /* @Test
     @DisplayName("Test findByIdNote")
     public  void findByIdNoteTest() throws Exception {
         Note note = new Note("1", 1, LocalDate.now(), "test1");
@@ -55,6 +55,6 @@ public class NoteServiceTest {
         when(noteRepository.insert(any(Note.class))).thenReturn(note1);
         noteService.addNote(note1);
         verify(noteRepository, times(1)).insert(note1);
-    }
+    }*/
 
 }

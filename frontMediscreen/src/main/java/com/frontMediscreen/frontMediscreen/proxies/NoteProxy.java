@@ -2,9 +2,8 @@ package com.frontMediscreen.frontMediscreen.proxies;
 
 import com.frontMediscreen.frontMediscreen.beans.NoteBean;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +15,9 @@ public interface NoteProxy {
 
     @GetMapping("/note/{id}")
     NoteBean getNoteById(@PathVariable("id") String id);
+
+    @PostMapping("/note/add")
+    NoteBean addNote(@RequestBody NoteBean note);
 
 
 }

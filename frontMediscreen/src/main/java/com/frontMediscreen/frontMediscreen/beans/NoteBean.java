@@ -24,6 +24,8 @@ public class NoteBean {
         this.recommendation = recommendation;
     }
 
+
+
     public String getId() {
         return id;
     }

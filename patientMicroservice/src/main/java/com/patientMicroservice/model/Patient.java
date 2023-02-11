@@ -1,9 +1,12 @@
 package com.patientMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "patient")
 public class Patient implements Serializable {
@@ -18,7 +21,7 @@ public class Patient implements Serializable {
 
     @Column(name = "last_name")
     private String lastName;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     @Column(name = "birthday")
     private LocalDate dob;
 
