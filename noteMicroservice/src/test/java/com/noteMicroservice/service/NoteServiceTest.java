@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.ui.ConcurrentModel;
+import org.springframework.ui.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class NoteServiceTest {
     @MockBean
     private NoteRepository noteRepository;
 
-   /* @Test
+    @Test
     @DisplayName("Test findByIdNote")
     public  void findByIdNoteTest() throws Exception {
         Note note = new Note("1", 1, LocalDate.now(), "test1");
@@ -55,6 +57,37 @@ public class NoteServiceTest {
         when(noteRepository.insert(any(Note.class))).thenReturn(note1);
         noteService.addNote(note1);
         verify(noteRepository, times(1)).insert(note1);
-    }*/
+    }
+
+    @Test
+    @DisplayName("Test showEditForm")
+    public void showEditFormTest() throws Exception {
+        Note note1 = new Note("1", 1, LocalDate.now(), "test1");
+        when(noteRepository.findById("1")).thenReturn(Optional.of(note1));
+        noteService.showEditFormNote("1", 1, new ConcurrentModel());
+        verify(noteRepository).findById("1");
+    }
+
+    @Test
+    @DisplayName("Test updateNote")
+    public void updateNoteTest() throws Exception {
+        Note note1 = new Note();
+        note1.setId("1");
+        note1.setPatientId(1);
+        note1.setDate(LocalDate.ofEpochDay(1L));
+        note1.setRecommendation("recommandation test1");
+        when(noteRepository.save(note1)).thenReturn(note1);
+
+        Note note2 = new Note();
+        note2.setId("1");
+        note2.setPatientId(1);
+        note2.setDate(LocalDate.ofEpochDay(1L));
+        note2.setRecommendation("recommandation test2");
+
+        noteService.updateNote("1", note2);
+        verify(noteRepository).save(note2);
+    }
+
+
 
 }

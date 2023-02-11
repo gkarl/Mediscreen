@@ -32,8 +32,6 @@
   <div class="row">
     <form action="#" th:action="@{/note/add/}" th:object="${note}"method="post" class="form-horizontal" style="width: 100%"> <!--controller url -->
       <!--{idPatient}(idPatient=${patientId})-->
-      <!--<input type ="hidden" th:field="*{id}">-->
-     <!--<input type ="hidden" th:field="*{patientId}">-->
 
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">Patient ID:</label>
@@ -48,14 +46,13 @@
         <p class="text-danger" th:if="${#fields.hasErrors('recommendation')}"
            th:errors="*{recommendation}">Error recommendation
         </p>
-      </div>
-      <div class="form-group" style="margin-top: 20px">
-        <div class="col-sm-12">
-          <input class="btn btn-primary" type="submit" value="Save a new Note">
-          <a class="btn btn-outline-danger" href="/patient/list/">Cancel
-          </a> <!--controller url-->
 
-        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+          <input type="submit" class="btn btn-primary m-2" value="Save">
+        <button type="button" class="btn btn-danger m-2">
+          <a href="/patient/list/" style="text-decoration: none; color: white">Cancel</a>
+        </button><!--controller url-->
       </div>
 
     </form>

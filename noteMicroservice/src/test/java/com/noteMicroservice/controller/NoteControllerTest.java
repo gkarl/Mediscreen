@@ -35,7 +35,7 @@ public class NoteControllerTest {
     @MockBean
     private NoteService noteService;
 
-    /*@Test
+    @Test
     @DisplayName("Test listNoteByPatientId")
     public void listNoteByPatientIdTest() throws Exception {
         Note note1 = new Note("1", 1, LocalDate.now(), "test1");
@@ -60,7 +60,30 @@ public class NoteControllerTest {
                 .sessionAttr("note", note1)
                 .content("{ \"id\":\"1\", \"patientId\":\"1\", \"date\":\"2023-01-09\", \"recommendation\":\"test\"}"))
                 .andExpect(status().isOk());
+    }
+
+    /*@Test
+    @DisplayName("Test showEditNoteForm")
+    public void showEditNoteFormTest() throws Exception {
+        Note note1 = new Note("1", 1, LocalDate.now(), "test1");
+        when(noteService.findByIdNote(any(String.class))).thenReturn(note1);
+        mockMvc.perform(get("/note/showEditForm/{id}/{patientId}", 1, 1).sessionAttr("note", note1)
+                .param("id", "1")
+                .param("patientId", "1")
+                .param("recommendation", "test1"))
+                .andExpect(status().isOk());
     }*/
+
+
+    @Test
+    @DisplayName("Test updateNote")
+    public void updateNoteFormTest() throws  Exception {
+       Note note1 = new Note("1", 1, LocalDate.now(), "test1");
+       when(noteService.findByIdNote(any(String.class))).thenReturn(note1);
+       when(noteService.updateNote(any(String.class), any(Note.class))).thenReturn(note1);
+       mockMvc.perform(post("/note/update/{id}", 1).contentType(MediaType.APPLICATION_JSON).sessionAttr("note", note1).content("{ \"id\":\"1\", \"patientId\":\"1\", \"date\":\"2023-01-09\", \"recommendation\":\"test1\"}"))
+               .andExpect(status().isOk());
+   }
 }
 
 

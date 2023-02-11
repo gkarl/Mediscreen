@@ -43,8 +43,8 @@ public class PatientController {
     }
 
     @PostMapping("/patient/showEditForm/{id}")
-    public void showEditForm(@PathVariable Integer id, Model model) throws PatientNotFoundException {
-        logger.info("GET one patient by is ID");
+    public void showEditForm(@PathVariable Integer id,Integer patientId, Model model) throws PatientNotFoundException {
+        logger.info("POST one patient by is ID");
         Patient patient = patientService.showEditForm(id);
         model.addAttribute("patient", patient);
     }

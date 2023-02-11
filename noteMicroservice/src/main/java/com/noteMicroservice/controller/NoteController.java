@@ -3,12 +3,14 @@ package com.noteMicroservice.controller;
 import com.noteMicroservice.model.Note;
 
 import com.noteMicroservice.service.NoteService;
+import org.springframework.ui.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Validated
@@ -36,6 +38,20 @@ public class NoteController {
     public Note addNote(@Validated @RequestBody Note note) {
         logger.info("POST add note to a patient");
         return noteService.addNote(note);
+    }
+
+    @GetMapping("/note/showEditForm/{id}/{patientId")
+    public void showEditNoteForm(@PathVariable("id") String id, Integer patientId, Model model) {
+        logger.info("GET update note form");
+        Note note = noteService.findByIdNote(id);
+        model.addAttribute("note", note);
+    }
+
+    @PostMapping("/note/update/{id}")
+    public Note updateNote(@PathVariable ("id") String id, @Valid @RequestBody Note note) {
+        logger.info("POST update note");
+        note.setId(id);
+        return noteService.updateNote(id, note);
     }
 
 

@@ -71,4 +71,6 @@ public class PatientControllerTest {
         mockMvc.perform(get("/patient/delete/1")).andExpect(status().isOk());
     }
 
+
+
 }
