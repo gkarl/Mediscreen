@@ -61,4 +61,5 @@ public class PatientController {
         logger.info("GET delete patient by id");
         patientService.deletePatient(id);
     }
+
 }

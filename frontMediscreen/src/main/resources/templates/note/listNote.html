@@ -85,10 +85,11 @@
         <td>
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-primary h6">
-              <a class="h6 mr-3" href="#" style="text-decoration: none; color: white"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <a class="h6 mr-3" th:href="@{/note/showEditForm/{id}/{patientId}(id=${note.id}, patientId=${patientId})}" style="text-decoration: none; color: white"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
             </button>
             <button type="button" class="btn btn-danger h6" >
-              <a class="h6" href="#" style="text-decoration: none; color: white"><i class="fa-solid fa-trash"></i></a>
+              <a class="h6" th:href="@{/note/delete/{id}(id=${note.id})}" style="text-decoration: none; color: white"><i class="fa-solid fa-trash"></i></a>
             </button>
           </div>
         </td>

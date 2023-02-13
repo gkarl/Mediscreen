@@ -6,10 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -24,26 +25,35 @@ public class NoteService {
         return noteRepository.findAllNotesByPatientId(patientId);
     }
 
-    public Note findByIdNote(String id) {
+    public Optional<Note> findByIdNote(String id) {
         logger.info("Service return one note by id");
-        return noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Note No found"));
+        return noteRepository.findById(id);
     }
 
     public Note addNote(Note note) {
         logger.info("Service add a note to one patient");
-        return noteRepository.insert(note);
-    }
-
-    public Note showEditFormNote(String id, Integer patientId, Model model) {
-        logger.info("Service note edit form");
-        Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Note No found"));
-        model.addAttribute("note", note);
-        return note;
-    }
-
-    public Note updateNote(String id, Note note) {
-        logger.info("Service update note");
         return noteRepository.save(note);
+    }
+
+    public Optional<Note> showEditFormNote(String id, Integer patientId) {
+        logger.info("Service note edit form");
+        Optional<Note> note = noteRepository.findById(id);
+        return Optional.of(note.get());
+    }
+
+    public Note updateNote(String id, Note noteUpdate) {
+        logger.info("Service update note");
+        Optional<Note> note1 = noteRepository.findById(id);
+        note1.get().setRecommendation(noteUpdate.getRecommendation());
+        note1.get().setPatientId(noteUpdate.getPatientId());
+        note1.get().setDate(LocalDate.now());
+        return noteRepository.save(note1.get());
+    }
+
+    public void deleteNote(String id) {
+        logger.info("Service delete note bu id");
+        /*Optional<Note> note = noteRepository.findById(id);*/
+        noteRepository.deleteById(id);
     }
 
 }

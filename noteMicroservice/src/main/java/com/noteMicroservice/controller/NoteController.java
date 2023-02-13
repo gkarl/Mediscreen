@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 @RestController
@@ -29,7 +30,7 @@ public class NoteController {
     }
 
     @GetMapping("/note/{id}")
-    public Note getNoteById(@PathVariable("id") String id) {
+    public Optional<Note> getNoteById(@PathVariable("id") String id) {
         logger.info("Get one note by id");
         return noteService.findByIdNote(id);
     }
@@ -40,18 +41,22 @@ public class NoteController {
         return noteService.addNote(note);
     }
 
-    @GetMapping("/note/showEditForm/{id}/{patientId")
-    public void showEditNoteForm(@PathVariable("id") String id, Integer patientId, Model model) {
+    @GetMapping("/note/showEditForm/{id}/{patientId}")
+    public void showEditNoteForm(@PathVariable("id") String id,@PathVariable Integer patientId, Model model) {
         logger.info("GET update note form");
-        Note note = noteService.findByIdNote(id);
+        Optional<Note> note = noteService.showEditFormNote(id, patientId);
         model.addAttribute("note", note);
     }
 
-    @PostMapping("/note/update/{id}")
-    public Note updateNote(@PathVariable ("id") String id, @Valid @RequestBody Note note) {
+    @PostMapping("/note/update/{patienId}")
+    public Note updateNote(@PathVariable ("patienId") String id, @RequestBody Note note) {
         logger.info("POST update note");
-        note.setId(id);
         return noteService.updateNote(id, note);
+    }
+
+    @GetMapping("/note/delete/{id}")
+    public void deleteNote(@PathVariable ("id") String id) {
+        noteService.deleteNote(id);
     }
 
 
