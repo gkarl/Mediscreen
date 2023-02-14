@@ -45,27 +45,6 @@ public class PatientServiceImpl {
         throw new PatientNotFoundException("Could not find any user whith ID " + id);
     }
 
-    public Patient updatePatient(Integer id, Patient patientUpdate) {
-        logger.info("Service update patient infos");
-        Optional<Patient> patient = patientRepository.findById(id);
-        patient.get().setFirstName(patientUpdate.getFirstName());
-        patient.get().setLastName(patientUpdate.getLastName());
-        patient.get().setDob(patientUpdate.getDob());
-        patient.get().setSex(patientUpdate.getSex());
-        patient.get().setAddress(patientUpdate.getAddress());
-        patient.get().setPhone(patientUpdate.getPhone());
-        return patientRepository.save(patient.get());
-    }
-
-    public void deleteByIdPatient(Integer id) throws PatientNotFoundException {
-        logger.info("Service Delete patient");
-        Optional<Patient> result = patientRepository.findById(id);
-        if (result.isPresent()) {
-            patientRepository.deleteById(id);
-        }
-        throw new PatientNotFoundException("Could not find any user whith ID " + id);
-    }
-
     public void deletePatient(Integer id) throws ChangeSetPersister.NotFoundException {
         Long count = patientRepository.countById(id);
         if (count == null || count == 0) {

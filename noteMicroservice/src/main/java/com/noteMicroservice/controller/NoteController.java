@@ -3,6 +3,7 @@ package com.noteMicroservice.controller;
 import com.noteMicroservice.model.Note;
 
 import com.noteMicroservice.service.NoteService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.ui.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,24 +24,28 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @ApiOperation(value = "Get all notes")
     @GetMapping("/note/list/{patientId}")
     public List<Note> listNoteByPatientId(@PathVariable ("patientId") Integer patientId) {
         logger.info("Get all note for one patient by it's id");
         return noteService.findNotesByPatientId(patientId);
     }
 
+    @ApiOperation(value = "Get one note by it's id")
     @GetMapping("/note/{id}")
     public Optional<Note> getNoteById(@PathVariable("id") String id) {
         logger.info("Get one note by id");
         return noteService.findByIdNote(id);
     }
 
+    @ApiOperation(value = "Save update note")
     @PostMapping("/note/add")
     public Note addNote(@Validated @RequestBody Note note) {
         logger.info("POST add note to a patient");
         return noteService.addNote(note);
     }
 
+    @ApiOperation(value = "Display edit form note")
     @GetMapping("/note/showEditForm/{id}/{patientId}")
     public void showEditNoteForm(@PathVariable("id") String id,@PathVariable Integer patientId, Model model) {
         logger.info("GET update note form");
@@ -48,12 +53,7 @@ public class NoteController {
         model.addAttribute("note", note);
     }
 
-    @PostMapping("/note/update/{patienId}")
-    public Note updateNote(@PathVariable ("patienId") String id, @RequestBody Note note) {
-        logger.info("POST update note");
-        return noteService.updateNote(id, note);
-    }
-
+    @ApiOperation(value = "Delete note")
     @GetMapping("/note/delete/{id}")
     public void deleteNote(@PathVariable ("id") String id) {
         noteService.deleteNote(id);

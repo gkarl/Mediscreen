@@ -41,15 +41,6 @@ public class NoteService {
         return Optional.of(note.get());
     }
 
-    public Note updateNote(String id, Note noteUpdate) {
-        logger.info("Service update note");
-        Optional<Note> note1 = noteRepository.findById(id);
-        note1.get().setRecommendation(noteUpdate.getRecommendation());
-        note1.get().setPatientId(noteUpdate.getPatientId());
-        note1.get().setDate(LocalDate.now());
-        return noteRepository.save(note1.get());
-    }
-
     public void deleteNote(String id) {
         logger.info("Service delete note bu id");
         /*Optional<Note> note = noteRepository.findById(id);*/

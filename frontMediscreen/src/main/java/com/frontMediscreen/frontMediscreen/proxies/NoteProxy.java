@@ -24,9 +24,6 @@ public interface NoteProxy {
     @GetMapping("/note/showEditForm/{id}/{patientId}")
     void showEditNoteForm(@PathVariable("id") String id,@PathVariable Integer patientId);
 
-    @PostMapping("/note/update/{patienId}")
-    NoteBean updateNote(@PathVariable ("patienId") String id, @RequestBody NoteBean note);
-
     @GetMapping("/note/delete/{id}")
     void deleteNote(@PathVariable ("id") String id);
 

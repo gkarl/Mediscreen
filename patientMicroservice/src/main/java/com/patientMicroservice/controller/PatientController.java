@@ -3,6 +3,7 @@ package com.patientMicroservice.controller;
 import com.patientMicroservice.exception.PatientNotFoundException;
 import com.patientMicroservice.model.Patient;
 import com.patientMicroservice.service.PatientServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +25,28 @@ public class PatientController {
     @Autowired
     private PatientServiceImpl patientService;
 
+    @ApiOperation(value = "Get all patients")
     @GetMapping("/patient/list")
     public List<Patient> listAllPatients() {
         logger.info("GET the list of all patients");
         return patientService.listAllPatients();
     }
 
+    @ApiOperation(value = "Get one patient by id")
     @GetMapping("/patient/{id}")
     public Optional<Patient> getByIdPatient(@PathVariable("id") Integer id) {
         logger.info("GET one patient by id");
         return patientService.findByIdPatient(id);
     }
 
+    @ApiOperation(value = "Save update patient")
     @PostMapping("/patient/add")
     public Patient addPatient(@RequestBody Patient patient) {
         logger.info("POST add one patient");
         return patientService.addPatient(patient);
     }
 
+    @ApiOperation(value = "Display edit form for patient")
     @PostMapping("/patient/showEditForm/{id}")
     public void showEditForm(@PathVariable Integer id,Integer patientId, Model model) throws PatientNotFoundException {
         logger.info("POST one patient by is ID");
@@ -49,13 +54,7 @@ public class PatientController {
         model.addAttribute("patient", patient);
     }
 
-    @PutMapping("/patient/update/{id}")
-    public Patient updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
-        logger.info("PUT patient update");
-        return patientService.updatePatient(id, patient);
-    }
-
-
+    @ApiOperation(value = "Delete patient by id")
     @GetMapping("/patient/delete/{id}")
     public void deleteByIdPatient(@PathVariable ("id") Integer id) throws PatientNotFoundException, ChangeSetPersister.NotFoundException {
         logger.info("GET delete patient by id");

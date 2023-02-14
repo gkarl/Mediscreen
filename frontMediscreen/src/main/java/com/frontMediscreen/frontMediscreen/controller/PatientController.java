@@ -3,6 +3,7 @@ package com.frontMediscreen.frontMediscreen.controller;
 import com.frontMediscreen.frontMediscreen.beans.PatientBean;
 import com.frontMediscreen.frontMediscreen.exception.NotFoundException;
 import com.frontMediscreen.frontMediscreen.proxies.PatientProxy;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class PatientController {
     @Autowired
     private PatientProxy patientProxy;
 
+    @ApiOperation(value = "List all patients")
     @GetMapping("/patient/list")
     public String listAllPatients(Model model) {
         logger.info("Get patient list front");
@@ -32,6 +34,7 @@ public class PatientController {
         return "patient/listPatient";
     }
 
+    @ApiOperation(value = "Display form when add new patient")
     @GetMapping("/patient/newForm")
     public String showNewForm(Model model) {
         logger.info("New patient form front");
@@ -40,6 +43,7 @@ public class PatientController {
         return "patient/patient_form";
     }
 
+    @ApiOperation(value = "Save update patient from from")
     @PostMapping("/patient/add")
     public String addPatient(PatientBean patient, RedirectAttributes redirectAttributes) {
         logger.info("Add new patient Front");
@@ -47,6 +51,7 @@ public class PatientController {
         return "redirect:/patient/list";
     }
 
+    @ApiOperation(value = "Display edit form for one patient")
     @GetMapping("/patient/showEditForm/{id}")
     public String showEditForm(@PathVariable("id") Integer id, PatientBean patient, Model model, RedirectAttributes redirectAttributes) {
         logger.info("Show Edit Form front");
@@ -61,6 +66,7 @@ public class PatientController {
         }
     }
 
+    @ApiOperation(value = "Delete one patient by id")
     @GetMapping("/patient/delete/{id}")
     public String deleteById(@PathVariable ("id") Integer id, RedirectAttributes redirectAttributes) {
         logger.info("delete patient front");

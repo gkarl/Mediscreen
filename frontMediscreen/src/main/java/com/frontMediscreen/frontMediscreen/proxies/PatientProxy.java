@@ -23,9 +23,6 @@ public interface PatientProxy {
     @PostMapping("/patient/showEditForm/{id}")
     public void showEditForm(@PathVariable Integer id);
 
-    @PutMapping("/patient/update/{id}")
-    PatientBean updatePatient(@PathVariable Integer id, @RequestBody PatientBean patient);
-
     @GetMapping("/patient/delete/{id}")
     void deleteByIdPatient(@PathVariable ("id") Integer id);
 

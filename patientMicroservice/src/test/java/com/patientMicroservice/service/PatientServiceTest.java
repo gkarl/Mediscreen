@@ -48,18 +48,6 @@ public class PatientServiceTest {
     }
 
     @Test
-    public void updatePatientTest() {
-        Integer patientId = 11;
-        Optional<Patient> optionalPatient = patientRepository.findById(patientId);
-        Patient patient = optionalPatient.get();
-        patient.setAddress("222 Boulevard Daguesseau");
-        patientRepository.save(patient);
-
-        Patient updatedPatient = patientRepository.findById(patientId).get();
-        Assertions.assertThat(updatedPatient.getAddress()).isEqualTo("222 Boulevard Daguesseau");
-    }
-
-    @Test
     public void getPatientTest() {
         Integer patientId = 11;
         Optional<Patient> optionalPatient = patientRepository.findById(patientId);

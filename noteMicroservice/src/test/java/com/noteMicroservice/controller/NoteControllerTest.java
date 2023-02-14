@@ -76,16 +76,12 @@ public class NoteControllerTest {
                 .andExpect(status().isOk());
     }
 
-
     @Test
-    @DisplayName("Test updateNote")
-    public void updateNoteFormTest() throws  Exception {
-       Note note1 = new Note("1", 1, LocalDate.now(), "test1");
-       when(noteService.findByIdNote(any(String.class))).thenReturn(Optional.of(note1));
-       when(noteService.updateNote(any(String.class), any(Note.class))).thenReturn(note1);
-       mockMvc.perform(post("/note/update/{id}", 1).contentType(MediaType.APPLICATION_JSON).sessionAttr("note", note1).content("{ \"id\":\"1\", \"patientId\":\"1\", \"date\":\"2023-01-09\", \"recommendation\":\"test1\"}"))
-               .andExpect(status().isOk());
-   }
+    @DisplayName("Test DeleteNote")
+    public  void  DeleteNoteTest() throws Exception {
+        Note note1 = new Note("1", 1, LocalDate.now(), "test1");
+        mockMvc.perform(get("/note/delete/1")).andExpect(status().isOk());
+    }
 }
 
 

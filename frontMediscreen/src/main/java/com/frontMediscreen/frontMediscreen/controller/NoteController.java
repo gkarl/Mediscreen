@@ -5,6 +5,7 @@ import com.frontMediscreen.frontMediscreen.beans.PatientBean;
 import com.frontMediscreen.frontMediscreen.exception.NotFoundException;
 import com.frontMediscreen.frontMediscreen.proxies.NoteProxy;
 import com.frontMediscreen.frontMediscreen.proxies.PatientProxy;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class NoteController {
     private PatientProxy patientProxy;
 
 
+    @ApiOperation(value = "List all notes for one patient id")
     @GetMapping("/note/list/{patientId}")
     public String listNoteByPatient(@PathVariable("patientId") Integer patientId, Model model) {
         logger.info("Get list note by patient id");
@@ -44,6 +46,7 @@ public class NoteController {
         return "note/listNote";
     }
 
+    @ApiOperation(value = "Display form when add new note for a patient")
     @GetMapping("/note/newForm/{PatientId}")
     public String showNewFormNote(@PathVariable("PatientId") Integer patientId, NoteBean note, Model model) {
         logger.info("New form note form front");
@@ -57,6 +60,7 @@ public class NoteController {
         return "note/note_form";
     }
 
+    @ApiOperation(value = "Save update patient's note from from")
     @PostMapping("/note/add/")
     public String addNote(Integer patientId, @ModelAttribute("note") NoteBean note, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -72,10 +76,10 @@ public class NoteController {
             note.setRecommendation(note.getRecommendation());
             noteProxy.addNote(note);
             return "redirect:/patient/list/" ;
-
         }
     }
 
+    @ApiOperation(value = "Display edit form for one note")
     @GetMapping("/note/showEditForm/{id}/{patientId}")
     public String showEditNoteForm(@PathVariable("id") String id,@PathVariable Integer patientId, NoteBean note, Model model, RedirectAttributes redirectAttributes) {
         logger.info("GET edit note form");
@@ -90,33 +94,13 @@ public class NoteController {
             model.addAttribute("note", note1);
             model.addAttribute("pageTitle", "Update New Note");
             return "note/note_edit";
-
         }   catch (NotFoundException e) {
         redirectAttributes.addFlashAttribute("message",  e.getMessage());
         return "redirect:/patient/list";
-    }
-
-    }
-
-    /*@PostMapping("/note/update/{id}/{patientId}")
-    public String updateNote(@PathVariable ("id") String id,@PathVariable ("patientId") Integer patientId,@ModelAttribute("note") NoteBean note , BindingResult result, Model model) {
-        logger.info("POST update note");
-
-
-        if (result.hasErrors()) {
-            logger.error("ERROR");
-            return "/patient/list/";
-        } else {
-            logger.info("POST update note ");
-            note.setDate(LocalDate.now());
-            note.setId(id);
-            note.setPatientId(patientId);
-            noteProxy.updateNote(id, note);
-            return "redirect:/patient/list/";
-
         }
-    }*/
+    }
 
+    @ApiOperation(value = "Delete one note by id")
     @GetMapping("/note/delete/{id}")
     public String deleteNote(@PathVariable String id, RedirectAttributes redirectAttributes) {
         logger.info("GET delete note by id");

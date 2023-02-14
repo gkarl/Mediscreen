@@ -3,6 +3,7 @@ package com.noteMicroservice.service;
 import com.noteMicroservice.model.Note;
 import com.noteMicroservice.repository.NoteRepository;
 import jdk.dynalink.linker.LinkerServices;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -68,26 +69,13 @@ public class NoteServiceTest {
         verify(noteRepository).findById("1");
     }
 
-   /* @Test
-    @DisplayName("Test updateNote")
-    public void updateNoteTest() throws Exception {
-        Note note1 = new Note();
-        note1.setId("1");
-        note1.setPatientId(1);
-        note1.setDate(LocalDate.ofEpochDay(1L));
-        note1.setRecommendation("recommandation test1");
-        when(noteRepository.save(note1)).thenReturn(note1);
-
-        Note note2 = new Note();
-        note2.setId("1");
-        note2.setPatientId(1);
-        note2.setDate(LocalDate.ofEpochDay(1L));
-        note2.setRecommendation("recommandation test2");
-
-        noteService.updateNote("1", note2);
-        verify(noteRepository).save(note2);
-    }*/
-
-
+    @Test
+    @DisplayName("Test deleteNote")
+    public void deleteNoteTest() throws Exception {
+        String noteId = "11";
+        noteService.deleteNote(noteId);
+        Optional<Note> optionalPatient = noteRepository.findById(noteId);
+        Assertions.assertThat(optionalPatient).isNotPresent();
+    }
 
 }
