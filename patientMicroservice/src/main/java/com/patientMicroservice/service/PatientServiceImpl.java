@@ -46,10 +46,6 @@ public class PatientServiceImpl {
     }
 
     public void deletePatient(Integer id) throws ChangeSetPersister.NotFoundException {
-        Long count = patientRepository.countById(id);
-        if (count == null || count == 0) {
-            throw  new ChangeSetPersister.NotFoundException();
-        }
         patientRepository.deleteById(id);
     }
 

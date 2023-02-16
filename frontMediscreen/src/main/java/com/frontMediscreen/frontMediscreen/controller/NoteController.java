@@ -3,6 +3,7 @@ package com.frontMediscreen.frontMediscreen.controller;
 import com.frontMediscreen.frontMediscreen.beans.NoteBean;
 import com.frontMediscreen.frontMediscreen.beans.PatientBean;
 import com.frontMediscreen.frontMediscreen.exception.NotFoundException;
+import com.frontMediscreen.frontMediscreen.proxies.AssessmentsProxy;
 import com.frontMediscreen.frontMediscreen.proxies.NoteProxy;
 import com.frontMediscreen.frontMediscreen.proxies.PatientProxy;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,9 @@ public class NoteController {
     @Autowired
     private PatientProxy patientProxy;
 
+    @Autowired
+    private AssessmentsProxy assessmentsProxy;
+
 
     @ApiOperation(value = "List all notes for one patient id")
     @GetMapping("/note/list/{patientId}")
@@ -38,11 +42,18 @@ public class NoteController {
         logger.info("Get list note by patient id");
         Optional<PatientBean> patient = patientProxy.getByIdPatient(patientId);
         List<NoteBean> noteListe = noteProxy.listNoteByPatientId(patientId);
+        int agePatient = assessmentsProxy.getAgePatient(patientId);
+        int triggersWordsCountInNotes = assessmentsProxy.getAssementsTrigger(patientId);
+        String assessmentsLevelOfRisk = assessmentsProxy.getAssessmentsLevelOfRisk(patientId);
         model.addAttribute("patientName", patient.get().getFirstName() + " " + patient.get().getLastName());
         model.addAttribute("patientId", patient.get().getId());
         model.addAttribute("date", LocalDateTime.now());
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteListe);
+        model.addAttribute("agePatient", agePatient);
+        model.addAttribute("sexePatient", patient.get().getSex());
+        model.addAttribute("countTriggers", triggersWordsCountInNotes);
+        model.addAttribute("assessmentsLevelOfRisk", assessmentsLevelOfRisk);
         return "note/listNote";
     }
 
@@ -63,10 +74,6 @@ public class NoteController {
     @ApiOperation(value = "Save update patient's note from from")
     @PostMapping("/note/add/")
     public String addNote(Integer patientId, @ModelAttribute("note") NoteBean note, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            logger.error("ERROR, for create new note");
-            return "/patient/list/";
-        } else {
             logger.info("Add new note for patient front");
             Optional<PatientBean> patient = patientProxy.getByIdPatient(patientId);
             model.addAttribute("patientId", patient.get().getId());
@@ -76,7 +83,6 @@ public class NoteController {
             note.setRecommendation(note.getRecommendation());
             noteProxy.addNote(note);
             return "redirect:/patient/list/" ;
-        }
     }
 
     @ApiOperation(value = "Display edit form for one note")

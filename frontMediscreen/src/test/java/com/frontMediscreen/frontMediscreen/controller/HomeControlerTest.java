@@ -1,4 +1,4 @@
-package com.frontMediscreen.frontMediscreen;
+package com.frontMediscreen.frontMediscreen.controller;
 
 
 import com.frontMediscreen.frontMediscreen.controller.HomePageController;

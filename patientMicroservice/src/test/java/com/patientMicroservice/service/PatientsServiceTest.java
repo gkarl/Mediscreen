@@ -73,16 +73,15 @@ public class PatientsServiceTest {
         verify(patientRepository).findById(3);
     }
 
-   /* @Test
+    @Test
     @DisplayName("Test deletePatient")
     public void deletePatientTest() throws Exception{
         Patient patient3 = new Patient(3, "Gavillot", "Karl", LocalDate.of(1970, 04, 16), 'M', "10 Route de la Reine", "0677777777");
         when(patientRepository.save(patient3)).thenReturn(patient3);
         when(patientRepository.findById(3)).thenReturn(Optional.of(patient3));
-        patientService.deletePatient(patient3.getId());
-        verify(patientRepository, Mockito.times(1)).delete(patient3);
-
-    }*/
+        patientService.deletePatient(3);
+        verify(patientRepository).deleteById(3);
+    }
 
 
 }

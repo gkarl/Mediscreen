@@ -70,7 +70,7 @@
                 <th>Gender</th>
                 <th>Address</th>
                 <th>Phone</th>
-                <th>Reports</th>
+                <th>Medical Reports</th>
                 <th><i class="fa fa-cogs" aria-hidden="true"></i></th>
             </tr>
             </thead>
@@ -88,7 +88,7 @@
                 <td th:text="${patient.phone}"></td>
                 <td>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary h6" style="margin-right: 60px">
+                        <button type="button" class="btn btn-success h6" style="margin-right: 70px">
                             <a class="h6 mr-3" href="#" style="text-decoration: none; color: white" th:href="@{/note/list/{id}(id=${patient.id})}"><i class="fa fa-sticky-note" aria-hidden="true"></i></a>
                         </button>
 

@@ -1,4 +1,4 @@
-package com.frontMediscreen.frontMediscreen;
+package com.frontMediscreen.frontMediscreen.controller;
 
 import com.frontMediscreen.frontMediscreen.beans.PatientBean;
 import com.frontMediscreen.frontMediscreen.controller.PatientController;
@@ -58,7 +58,7 @@ public class PatientControllerTest {
         mockMvc.perform(post("/patient/add").sessionAttr("patient", patient)
                 .param("firstName", "Gavillot")
                 .param("lastName", "Karl")
-                .param("dob", String.valueOf(LocalDate.of(1900, 02, 16)))
+                .param("dob",  String.valueOf(LocalDate.of(1900,02, 16)))
                 .param("sex", "M")
                 .param("address", "2 Route de la Reine")
                 .param("phone", "0677777777"))

@@ -26,7 +26,7 @@ public class AssessmentsService {
     @Autowired
     private NoteProxy noteProxy;
 
-    public static final List<String> triggersList = List.of("Hemoglobin A1C", "MicroAlbumin", "Height", "Weight", "Smoker", "Abnormal", "Cholesterol", "Dizziness", "Relapse", "Reaction", "Antibodies");
+    public static final List<String> triggersList = List.of("hémoglobine A1C", "microalbumine", "taille", "poids", "fumeur", "anormal", "cholestérol", "vertige", "rechute", "réaction", "anticorps");
     public int agePatient(Integer id) {
         logger.info("Service Age Patient");
         Optional<PatientBean> patient = patientProxy.getByIdPatient(id);
