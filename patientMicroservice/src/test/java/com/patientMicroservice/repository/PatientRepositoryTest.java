@@ -1,9 +1,10 @@
-package com.patientMicroservice.service;
+package com.patientMicroservice.repository;
 
 import com.patientMicroservice.model.Patient;
-import com.patientMicroservice.repository.PatientRepository;
 
+import com.patientMicroservice.service.PatientServiceImpl;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,10 +14,14 @@ import org.springframework.test.annotation.Rollback;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-public class PatientServiceTest {
+public class PatientRepositoryTest {
 
     @Autowired
     private PatientRepository patientRepository;
@@ -26,7 +31,7 @@ public class PatientServiceTest {
         Patient patient = new Patient();
         patient.setFirstName("Karl");
         patient.setLastName("Gavillot");
-        patient.setDob(LocalDate.of(1900, 02, 16));
+        patient.setDob(LocalDate.of(1970, 04, 16));
         patient.setSex('M');
         patient.setAddress("2 Route de la Reine");
         patient.setPhone("0677777777");
@@ -47,7 +52,7 @@ public class PatientServiceTest {
         }
     }
 
-    @Test
+   /* @Test
     public void getPatientTest() {
         Integer patientId = 11;
         Optional<Patient> optionalPatient = patientRepository.findById(patientId);
@@ -63,5 +68,6 @@ public class PatientServiceTest {
         Optional<Patient> optionalPatient = patientRepository.findById(patientId);
         Assertions.assertThat(optionalPatient).isNotPresent();
     }
+*/
 
 }

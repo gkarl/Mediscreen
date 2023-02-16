@@ -39,7 +39,7 @@ public class PatientControllerTest {
         List<Patient> listPatient = new ArrayList<>();
         patient.setFirstName("Karl");
         patient.setLastName("Gavillot");
-        patient.setDob(LocalDate.of(1900, 02, 16));
+        patient.setDob(LocalDate.of(1970, 04, 16));
         patient.setSex('M');
         patient.setAddress("2 Route de la Reine");
         patient.setPhone("0677777777");
@@ -60,7 +60,7 @@ public class PatientControllerTest {
     @DisplayName(" Test get addPatient")
     public void AddPatientTest() throws Exception {
         mockMvc.perform(post("/patient/add")
-                .content("{ \"family\":\"Gavillot\", \"given\":\"Karl\", \"dob\":\"1900-02-16\", \"sex\":\"M\", \"address\":\"2 Route de la Reine\", \"phone\":\"0677777777\" }")
+                .content("{ \"family\":\"Gavillot\", \"given\":\"Karl\", \"dob\":\"1970-04-16\", \"sex\":\"M\", \"address\":\"2 Route de la Reine\", \"phone\":\"0677777777\" }")
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 
