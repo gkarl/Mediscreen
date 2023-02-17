@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ContextConfiguration(classes = {NoteService.class})
 @ExtendWith(SpringExtension.class)
@@ -34,8 +35,10 @@ public class NoteServiceTest {
     @Test
     @DisplayName("Test findByIdNote")
     public  void findByIdNoteTest() throws Exception {
-        Note note = new Note("1", 1, LocalDate.now(), "test1");
-        when(noteRepository.findById(any(String.class))).thenReturn(Optional.of(note));
+        Note note1 = new Note("1", 1, LocalDate.now(), "test1");
+        when(noteRepository.findById(any(String.class))).thenReturn(Optional.of(note1));
+        Note note2 = noteService.findByIdNote("1");
+        assertEquals(note1, note2);
     }
 
     @Test

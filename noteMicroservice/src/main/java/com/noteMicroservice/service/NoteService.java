@@ -25,9 +25,9 @@ public class NoteService {
         return noteRepository.findAllNotesByPatientId(patientId);
     }
 
-    public Optional<Note> findByIdNote(String id) {
+    public Note findByIdNote(String id) {
         logger.info("Service return one note by id");
-        return noteRepository.findById(id);
+        return noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Note note found"));
     }
 
     public Note addNote(Note note) {

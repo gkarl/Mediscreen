@@ -68,7 +68,7 @@ public class NoteControllerTest {
     @DisplayName("Test showEditNoteForm")
     public void showEditNoteFormTest() throws Exception {
         Note note1 = new Note("1", 1, LocalDate.now(), "test1");
-        when(noteService.findByIdNote(any(String.class))).thenReturn(Optional.of(note1));
+        when(noteService.findByIdNote(any(String.class))).thenReturn(note1);
         mockMvc.perform(get("/note/showEditForm/{id}/{patientId}", 1, 1).sessionAttr("note", note1)
                 .param("id", "1")
                 .param("patientId", "1")

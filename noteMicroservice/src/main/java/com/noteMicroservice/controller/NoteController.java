@@ -33,7 +33,7 @@ public class NoteController {
 
     @ApiOperation(value = "Get one note by it's id")
     @GetMapping("/note/{id}")
-    public Optional<Note> getNoteById(@PathVariable("id") String id) {
+    public Note getNoteById(@PathVariable("id") String id) {
         logger.info("Get one note by id");
         return noteService.findByIdNote(id);
     }
