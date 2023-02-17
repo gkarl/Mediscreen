@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: patient_mediscreen_sql
+    restart: always
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: rootroot
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/data/db
+
+  mongodb:
+    image: mongo:5
+    container_name: note_mediscreen_mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+
+  assessment:
+    image: assessments_microservice
+    restart: always
+    ports:
+      - "8083:8083"
+    environment:
+      - PATIENT_URL=patient:8081
+      - NOTE_URL=note:8082
+    depends_on:
+      - patient
+      - note
+    container_name: assessments_microservice
+
+  frontMediscreen:
+    image: front_mediscreen
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - PATIENT_URL=patient:8081
+      - NOTE_URL=note:8082
+      - ASSESSMENT_URL=assessments:8083
+    depends_on:
+      - patient
+      - note
+      - assessment
+    container_name: front_mediscreen
+
+  note:
+    image: note_microservice
+    depends_on:
+      - mongodb
+    environment:
+      spring_data_mongodb_host: note_mediscreen_mongodb
+    restart: always
+    ports:
+      - "8082:8082"
+    container_name: note_microservice
+
+  patient:
+    image: patient_microservice
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootroot
+      SPRING_DATASOURCE_URL: jdbc:mysql://patient_mediscreen_sql:3306/patient?serverTimezone=UTC
+    ports:
+      - "8081:8081"
+    container_name: patient_microservice
+
+volumes:
+  mysql_data:
+  mongodb_data:
