@@ -82,7 +82,7 @@ public class NoteController {
             note.setDate(LocalDate.now());
             note.setRecommendation(note.getRecommendation());
             noteProxy.addNote(note);
-            return "redirect:/patient/list/" ;
+            return "redirect:/note/list/"+ patientId;
     }
 
     @ApiOperation(value = "Display edit form for one note")
@@ -102,7 +102,7 @@ public class NoteController {
             return "note/note_edit";
         }   catch (NotFoundException e) {
         redirectAttributes.addFlashAttribute("message",  e.getMessage());
-        return "redirect:/patient/list";
+          return "redirect:/note/list/"+ patientId;
         }
     }
 

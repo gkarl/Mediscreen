@@ -29,23 +29,23 @@
     <input type ="hidden" th:field="*{id}">
     <div class="border border-secondary rounded p-3">
 
-      <div class="form-group row">
+      <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
         <label class="col-sm-4 col-form-label">First Name:</label>
         <div class="col-sm-8">
           <input type="text" th:field="*{firstName}" class="form-control" required minlength="4" maxlength="50"/>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
         <label class="col-sm-4 col-form-label">Last Name:</label>
         <div class="col-sm-8">
           <input type="text" th:field="*{lastName}" class="form-control" required minlength="4" maxlength="50"/>
         </div>
       </div>
 
-      <div class="form-group" style="margin-top: 10px; margin-bottom: 10px">
-        <label for="dob" class="col-sm-2 control-label">Birthday</label>
-        <div class="col-sm-10">
+      <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
+        <label for="dob" class="col-sm-4 control-label" >Birthday</label>
+        <div class="col-sm-8" >
           <input type="date" id="dob" placeholder="Date of birth" class="col-4"
                  th:field="*{dob}" th:text="${#dates.format(patient.dob, 'yyyy-MM-dd')}">
 
@@ -55,9 +55,9 @@
         </div>
       </div>
 
-      <div class="form-group" style="margin-top: 10px; margin-bottom: 10px">
-        <label for="genre" class="col-sm-2 control-label">Gender</label>
-        <div class="col-sm-10">
+      <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
+        <label for="genre" class="col-sm-4 control-label" >Gender</label>
+        <div class="col-sm-8" >
           <label class="checkbox-inline"><input type="radio" id="genre" th:field="*{sex}" th:value="F">Woman</label>
           <label class="checkbox-inline"><input type="radio" th:field="*{sex}" th:value="M">Man</label>
           <p class="text-danger" th:if="${#fields.hasErrors('sex')}"
@@ -66,14 +66,14 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
         <label class="col-sm-4 col-form-label">Address:</label>
         <div class="col-sm-8">
           <input type="text" th:field="*{address}" class="form-control" />
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
         <label class="col-sm-4 col-form-label">Phone:</label>
         <div class="col-sm-8">
           <input type="text" th:field="*{phone}" class="form-control" />
