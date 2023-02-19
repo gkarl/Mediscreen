@@ -21,6 +21,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Datas use for notes traitements expose in front end
+ * @author Gavillot Karl
+ * @version 1.0
+ */
 @Controller
 public class NoteController {
 
@@ -36,6 +41,12 @@ public class NoteController {
     private AssessmentsProxy assessmentsProxy;
 
 
+    /**
+     * Get all note list from a patient whith age trigger counter and assessement diabetes level of risk
+     * @param patientId patient id
+     * @param model get datas in front
+     * @return html page for display notes list from a patient
+     */
     @ApiOperation(value = "List all notes for one patient id")
     @GetMapping("/note/list/{patientId}")
     public String listNoteByPatient(@PathVariable("patientId") Integer patientId, Model model) {
@@ -57,6 +68,13 @@ public class NoteController {
         return "note/listNote";
     }
 
+    /**
+     * Get display form for create a new note
+     * @param patientId patient id
+     * @param note
+     * @param model get datas in front
+     * @return html page display form
+     */
     @ApiOperation(value = "Display form when add new note for a patient")
     @GetMapping("/note/newForm/{PatientId}")
     public String showNewFormNote(@PathVariable("PatientId") Integer patientId, NoteBean note, Model model) {
@@ -71,9 +89,16 @@ public class NoteController {
         return "note/note_form";
     }
 
+    /**
+     * Post create or update note of a patient
+     * @param patientId patient id
+     * @param note
+     * @param model get datas in front
+     * @return html page display note list of a patient
+     */
     @ApiOperation(value = "Save update patient's note from from")
     @PostMapping("/note/add/")
-    public String addNote(Integer patientId, @ModelAttribute("note") NoteBean note, BindingResult result, Model model) {
+    public String addNote(Integer patientId, @ModelAttribute("note") NoteBean note, Model model) {
             logger.info("Add new note for patient front");
             Optional<PatientBean> patient = patientProxy.getByIdPatient(patientId);
             model.addAttribute("patientId", patient.get().getId());
@@ -85,6 +110,15 @@ public class NoteController {
             return "redirect:/note/list/"+ patientId;
     }
 
+    /**
+     * Get edit form for one note
+     * @param id note id
+     * @param patientId patient id
+     * @param note
+     * @param model get datas in front
+     * @param redirectAttributes
+     * @return html page display form to edit note
+     */
     @ApiOperation(value = "Display edit form for one note")
     @GetMapping("/note/showEditForm/{id}/{patientId}")
     public String showEditNoteForm(@PathVariable("id") String id,@PathVariable Integer patientId, NoteBean note, Model model, RedirectAttributes redirectAttributes) {
@@ -106,6 +140,12 @@ public class NoteController {
         }
     }
 
+    /**
+     * Delete one note by id
+     * @param id note
+     * @param redirectAttributes
+     * @return html page display list patients
+     */
     @ApiOperation(value = "Delete one note by id")
     @GetMapping("/note/delete/{id}")
     public String deleteNote(@PathVariable String id, RedirectAttributes redirectAttributes) {

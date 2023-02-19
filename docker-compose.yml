@@ -23,7 +23,7 @@ services:
       - mongodb_data:/data/db
 
 
-  assessment:
+  assessments:
     image: assessments_microservice
     restart: always
     ports:

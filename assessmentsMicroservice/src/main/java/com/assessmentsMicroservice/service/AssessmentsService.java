@@ -15,6 +15,11 @@ import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service assessment level of diabetes risks evaluate from keywords on patient's notes
+ * @author Gavillot Karl
+ * @version 1.0
+ */
 @Service
 public class AssessmentsService {
 
@@ -27,6 +32,12 @@ public class AssessmentsService {
     private NoteProxy noteProxy;
 
     public static final List<String> triggersList = List.of("hémoglobine A1C", "microalbumine", "taille", "poids", "fumeur", "anormal", "cholestérol", "vertige", "rechute", "réaction", "anticorps");
+
+    /**
+     * Return age of a patient
+     * @param id patient id
+     * @return age of a patient
+     */
     public int agePatient(Integer id) {
         logger.info("Service Age Patient");
         Optional<PatientBean> patient = patientProxy.getByIdPatient(id);
@@ -35,12 +46,22 @@ public class AssessmentsService {
         return agePatient;
     }
 
+    /**
+     * Return age of a patient
+     * @param birthPatient birthdate of patient
+     * @return age patient
+     */
     public int getAgePatient(LocalDate birthPatient) {
         logger.info("Service get Age Patient");
         int agePatient = Period.between(birthPatient, LocalDate.now()).getYears();
         return agePatient;
     }
 
+    /**
+     * Return counter of words trigger from list note patient
+     * @param id patient id
+     * @return counter trigger
+     */
     public int getNumberOfTriggerWords(Integer id) {
         logger.info("Service Number of trigger for one patient");
         List<NoteBean> notes = noteProxy.listNoteByPatientId(id);
@@ -55,6 +76,11 @@ public class AssessmentsService {
         return triggersCounter;
     }
 
+    /**
+     * Return enum word (level of diabetes risk) evaluate with if else conditions
+     * @param id patient id
+     * @return assessment
+     */
     public Assessments getAssessmentsLevelOfRisks(Integer id) {
         logger.info("Service get Assessments level of risks");
         Optional<PatientBean> patient = patientProxy.getByIdPatient(id);

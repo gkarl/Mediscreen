@@ -50,4 +50,4 @@ http://localhost:8003/swagger-ui.html#/
 
 ## Diagramme d'architecture
 
-![DiagrammeArchitectureProjet9](https://user-images.githubusercontent.com/24941159/219900137-4d528386-c190-4f07-ad42-7c723869d0de.png)
+![Diagramme Architecture](https://user-images.githubusercontent.com/24941159/219952386-a7b4f39a-0d16-4849-b642-2574ef629dd2.png)
