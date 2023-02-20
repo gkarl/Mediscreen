@@ -9,6 +9,11 @@ Mediscreen est une application qui permet aux médecins de gérer ses fiches pat
 - Java 11
 - Spring Boot 2.7.8
 - Gradle 8
+- Spring starter web
+- Thymeleaf
+- Bootstrap
+- Spring Openfeign
+- Swagger
 
 #### Patient Microservice :
 
@@ -16,6 +21,8 @@ Mediscreen est une application qui permet aux médecins de gérer ses fiches pat
 - Spring Boot 2.7.8
 - Gradle 8
 - Mysql
+- Spring Data JPA
+- Swagger
 
 #### Note Microservice :
 
@@ -23,12 +30,16 @@ Mediscreen est une application qui permet aux médecins de gérer ses fiches pat
 - Spring Boot 2.7.8
 - Gradle 8
 - MongoDB
+- Spring Data Mongodb
+- Swagger
 
 #### Assessments Microservice :
 
 - Java 11
 - Spring Boot 2.7.8
 - Gradle 8
+- Spring Openfeign
+- Swagger
 
 ## Documentation Technique (Swagger)
 
